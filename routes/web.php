@@ -11,6 +11,21 @@
 |
 */
 
-$app->get('/', function () use ($app) {
+$app->get('', ['as' => 'home', function() use ($app) {
     return $app->version();
+}]);
+
+$app->get('api', function() {
+    return response()->json(['COW' => 'YES I AM REAL MAN YOU WANT TO GO SKATEBOARDS']);
+});
+
+$app->get('api/login', 'UserController@authenticate');
+
+$app->group(['middleware' => 'auth'], function() use ($app) {
+    // User routes
+    $app->get('api/logout', 'UserController@logout');
+    
+    // Note routes
+    $app->get('api/notes', 'NoteController@index');
+    $app->get('api/notes/new', 'NoteController@create');
 });
