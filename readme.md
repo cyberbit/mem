@@ -1,6 +1,11 @@
 # Installation:
 
-Mem can be run standalone when the host machine is properly configured, or in Homestead, where the configuration is done automatically through a Vagrant virtual machine. The instructions below are for running using Homestead Improved, which simplifies the setup process for developing with Homestead.
+Mem can be run standalone when the host machine is properly configured, or in [Laravel Homestead](https://laravel.com/docs/5.4/homestead), where the configuration is done automatically through a Vagrant virtual machine. The instructions below are for running using [Homestead Improved](https://www.sitepoint.com/quick-tip-get-homestead-vagrant-vm-running/), which simplifies the setup process for developing with Homestead.
+
+## Requirements
+ - [**VirtualBox**](http://virtualbox.org/)
+ - [**Vagrant**](https://www.vagrantup.com/)
+ - [**Git**](https://git-scm.com/downloads) (**Git Tools** if on Windows).
 
 1. **Set up the Homestead Improved VM.** Run the following in a bash-like prompt (on Windows, use Git Bash):
    ```bash
@@ -26,25 +31,28 @@ Mem can be run standalone when the host machine is properly configured, or in Ho
    vagrant up
    ```
 5. **Connect to the VM and install dependencies.**
+   
+   > From this point on, lines beginning with `$` indicate commands run inside the VM.
+   
    ```bash
    vagrant ssh
-   cd Code/Project
-   composer update
+   $ cd Code/Project
+   $ composer update
    ```
 6. **Configure the project environment.**
 
    First, create an environment file:
    
    ```bash
-   cp .env.example .env
-   nano .env
+   $ cp .env.example .env
+   $ nano .env
    ```
    
    Update `APP_KEY` to something appropriate. The **CodeIgniter Encryption Keys** section of https://randomkeygen.com works well for this purpose, as Lumen does not provide a `key:generate` utility, which is available in full Laravel distributions.
 7. **Configure the database and insert initial data.**
    ```bash
-   php artisan migrate
-   php artisan db:seed
+   $ php artisan migrate
+   $ php artisan db:seed
    ```
 8. **Use the app!** Visit `homestead.app` (or whatever host you configured in step 2) in a web browser.
    
