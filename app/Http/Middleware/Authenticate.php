@@ -36,7 +36,20 @@ class Authenticate
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            // API request
+            if ($request->is('api/*')) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+            
+            // Non-API request (token provided)
+            elseif ($request->has('api_token')) {
+                return redirect()->route('login', ['error' => 1]);
+            }
+            
+            // Non-API request (no token provided)
+            else {
+                return redirect('login');
+            }
         }
 
         return $next($request);

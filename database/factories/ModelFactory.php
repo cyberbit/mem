@@ -15,5 +15,13 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
+        'api_token' => base64_encode(str_random(24))
+    ];
+});
+
+$factory->define(App\Note::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->sentence(4),
+        'body' => $faker->paragraph()
     ];
 });

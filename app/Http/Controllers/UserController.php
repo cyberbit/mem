@@ -19,6 +19,13 @@ class UserController extends Controller
     {
         // $this->middleware('auth:api');
     }
+    
+    /**
+     * Return current User object.
+     */
+    public function me(Request $request) {
+        return response()->json(['status' => 'success', 'user' => Auth::user()->makeVisible(['created_at', 'updated_at'])]);
+    }
 
     /**
      * Authenticate the user with an email and password.
@@ -34,14 +41,22 @@ class UserController extends Controller
         
         $user = User::where('email', $request->input('email'))->first();
         
-        if (Hash::check($request->input('password'), $user->password)) {
+        if ($user and Hash::check($request->input('password'), $user->password)) {
             $api_token = base64_encode(str_random(24));
             
             User::where('email', $request->input('email'))->update(['api_token' => "$api_token"]);
             
-            return response()->json(['status' => 'success', 'api_token' => $api_token]);
+            if ($request->has('redirect')) {
+                return redirect()->route('notes', ['api_token' => $api_token]);
+            } else {
+                return response()->json(['status' => 'success', 'api_token' => $api_token]);
+            }
         } else {
-            return response()->json(['status' => 'fail'], 401);
+            if ($request->has('redirect')) {
+                return redirect()->route('login', ['error' => 1]);
+            } else {
+                return response()->json(['status' => 'fail'], 401);
+            }
         }
     }
     
@@ -54,6 +69,15 @@ class UserController extends Controller
         $user->api_token = null;
         $user->save();
         
-        return response()->json(['status' => 'success']);
+        // API request
+        if ($request->is('api/*')) {
+            return response()->json(['status' => 'success']);
+        }
+        
+        // Non-API request
+        else {
+            // Redirect to homepage
+            return redirect()->route('home');
+        }
     }
 }

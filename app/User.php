@@ -22,18 +22,18 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
 
     /**
-     * The attributes excluded from the model's JSON form.
+     * The attributes included in the model's JSON form.
      *
      * @var array
      */
-    protected $hidden = [
-        'password',
+    protected $visible = [
+        'id', 'name', 'email'
     ];
     
     /**
      * Get all Notes from user
      */
     public function notes() {
-        return $this->hasMany('App\Note');
+        return $this->hasMany(Note::class);
     }
 }

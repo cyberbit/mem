@@ -14,4 +14,11 @@ class Note extends Model {
     protected $fillable = [
         'title', 'body'
     ];
+    
+    /**
+     * Get the user that created the note.
+     */
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }
