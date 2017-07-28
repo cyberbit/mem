@@ -1,0 +1,2 @@
+title, body
+Postman {{$guid}}, My special number is {{$randomInt}}

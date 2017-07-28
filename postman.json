@@ -1,0 +1,468 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Mem",
+		"_postman_id": "11b871d4-9083-d0c4-7ddc-b7eaa4e83566",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var datum = JSON.parse(responseBody);\n\ntests.greeting = datum.greeting === \"HELLO HUMAN\";"
+					}
+				}
+			],
+			"request": {
+				"url": "{{wroot}}/api",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/notes (unauthorized)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var datum = JSON.parse(responseBody);\n\ntests.unauthorized = datum.error === \"Unauthorized\";"
+					}
+				}
+			],
+			"request": {
+				"url": "{{wroot}}/api/notes?api_token={{api_token}}",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var datum = JSON.parse(responseBody);\n\ntests.success = datum.status === \"success\";\n\npostman.setEnvironmentVariable(\"api_token\", datum.api_token);"
+					}
+				}
+			],
+			"request": {
+				"url": "{{wroot}}/api/login?email=test@test.com&password=$sh4rpspr1nG$",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/me",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var datum = JSON.parse(responseBody);\n\ntests.success = datum.status === \"success\";\ntests.user = datum.user && datum.user.id;"
+					}
+				}
+			],
+			"request": {
+				"url": "{{wroot}}/api/me?api_token={{api_token}}",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/notes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var datum = JSON.parse(responseBody);\n\ntests.success = datum.status === \"success\";\ntests.notes = typeof datum.notes == \"object\";"
+					}
+				}
+			],
+			"request": {
+				"url": "{{wroot}}/api/notes?api_token={{api_token}}",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/notes/create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var datum = JSON.parse(responseBody);\n\ntests.success = datum.status === \"success\";\ntests.note = datum.note && datum.note.id;\n\npostman.setEnvironmentVariable(\"note_id\", (tests.note ? datum.note.id : null));"
+					}
+				}
+			],
+			"request": {
+				"url": "{{wroot}}/api/notes/create?api_token={{api_token}}&title=Postman create {{$guid}}&body=Woah! My special number is {{$randomInt}}. Thank you for being awesome!",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/notes/{id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var datum = JSON.parse(responseBody);\n\ntests.success = datum.status === \"success\";\ntests.note = datum.note && datum.note.id;"
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "{{wroot}}/api/notes/:id?api_token={{api_token}}",
+					"auth": {},
+					"host": [
+						"{{wroot}}"
+					],
+					"path": [
+						"api",
+						"notes",
+						":id"
+					],
+					"query": [
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					],
+					"variable": [
+						{
+							"value": "{{note_id}}",
+							"id": "id"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/notes/{id}/update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var datum = JSON.parse(responseBody);\n\ntests.success = datum.status === \"success\";\ntests.note = datum.note && datum.note.id;"
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "{{wroot}}/api/notes/:id/update?api_token={{api_token}}&title={{title}}&body={{body}}",
+					"auth": {},
+					"host": [
+						"{{wroot}}"
+					],
+					"path": [
+						"api",
+						"notes",
+						":id",
+						"update"
+					],
+					"query": [
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						},
+						{
+							"key": "title",
+							"value": "{{title}}"
+						},
+						{
+							"key": "body",
+							"value": "{{body}}"
+						}
+					],
+					"variable": [
+						{
+							"value": "{{note_id}}",
+							"id": "id"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/notes/{id}/delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var datum = JSON.parse(responseBody);\n\ntests.success = datum.status === \"success\";"
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "{{wroot}}/api/notes/:id/delete?api_token={{api_token}}",
+					"auth": {},
+					"host": [
+						"{{wroot}}"
+					],
+					"path": [
+						"api",
+						"notes",
+						":id",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					],
+					"variable": [
+						{
+							"value": "{{note_id}}",
+							"id": "id"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/notes/{id} (invalid id)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var datum = JSON.parse(responseBody);\n\ntests.success = datum.status === \"fail\";"
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "{{wroot}}/api/notes/:id?api_token={{api_token}}",
+					"auth": {},
+					"host": [
+						"{{wroot}}"
+					],
+					"path": [
+						"api",
+						"notes",
+						":id"
+					],
+					"query": [
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					],
+					"variable": [
+						{
+							"value": "{{note_id}}",
+							"id": "id"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/notes/{id}/update (invalid id)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var datum = JSON.parse(responseBody);\n\ntests.success = datum.status === \"fail\";"
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "{{wroot}}/api/notes/:id/update?api_token={{api_token}}&title={{title}}&body={{body}}",
+					"auth": {},
+					"host": [
+						"{{wroot}}"
+					],
+					"path": [
+						"api",
+						"notes",
+						":id",
+						"update"
+					],
+					"query": [
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						},
+						{
+							"key": "title",
+							"value": "{{title}}"
+						},
+						{
+							"key": "body",
+							"value": "{{body}}"
+						}
+					],
+					"variable": [
+						{
+							"value": "{{note_id}}",
+							"id": "id"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/notes/{id}/delete (invalid id)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var datum = JSON.parse(responseBody);\n\ntests.success = datum.status === \"fail\";"
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "{{wroot}}/api/notes/:id/delete?api_token={{api_token}}",
+					"auth": {},
+					"host": [
+						"{{wroot}}"
+					],
+					"path": [
+						"api",
+						"notes",
+						":id",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					],
+					"variable": [
+						{
+							"value": "{{note_id}}",
+							"id": "id"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var datum = JSON.parse(responseBody);\n\ntests.success = datum.status === \"success\";\n\npostman.clearEnvironmentVariable(\"api_token\");\npostman.clearEnvironmentVariable(\"note_id\");"
+					}
+				}
+			],
+			"request": {
+				"url": "{{wroot}}/api/logout?api_token={{api_token}}",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

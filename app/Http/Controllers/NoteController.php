@@ -48,13 +48,6 @@ class NoteController extends Controller
     }
     
     /**
-     * Display demo page of notes.
-     */
-    public function demo(Request $request) {
-        return response()->json(['user' => Auth::user(), 'notes' => factory(Note::class, 3)->make()]);
-    }
-    
-    /**
      * Display single note.
      */
     public function view(Request $request, $id) {
@@ -117,17 +110,19 @@ class NoteController extends Controller
      */
     public function create(Request $request) {
         //return response()->json(['auth_notes' => Auth::user()->notes]);
-    
+        
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required'
         ]);
         
-        if (Auth::user()->notes()->create($request->all())) {
+        $note = Auth::user()->notes()->create($request->all());
+        
+        if ($note) {
             if ($request->has('redirect')) {
                 return redirect()->route('notes', ['api_token' => Auth::user()->api_token]);
             } else {
-                return response()->json(['status' => 'success']);
+                return response()->json(['status' => 'success', 'note' => $note]);
             }
         } else {
             return response()->json(['status' => 'fail']);
@@ -143,11 +138,13 @@ class NoteController extends Controller
             'body' => 'required'
         ]);
         
-        if (Auth::user()->notes->find($id)->update($request->all())) {
+        $note = Auth::user()->notes->find($id);
+        
+        if ($note and $note->update($request->all())) {
             if ($request->has('redirect')) {
                 return redirect()->route('notes', ['api_token' => Auth::user()->api_token]);
             } else {
-                return response()->json(['status' => 'success']);
+                return response()->json(['status' => 'success', 'note' => $note]);
             }
         } else {
             return response()->json(['status' => 'fail']);
@@ -158,7 +155,9 @@ class NoteController extends Controller
      * Delete note.
      */
     public function delete(Request $request, $id) {
-        if (Auth::user()->notes->find($id)->delete()) {
+        $note = Auth::user()->notes->find($id);
+        
+        if ($note and $note->delete()) {
             if ($request->has('redirect')) {
                 return redirect()->route('notes', ['api_token' => Auth::user()->api_token]);
             } else {

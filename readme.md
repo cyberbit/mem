@@ -37,7 +37,7 @@ Mem can be run standalone when the host machine is properly configured, or in [L
    ```bash
    vagrant ssh
    $ cd Code/Project
-   $ composer update
+   $ composer install
    ```
 6. **Configure the project environment.**
 
