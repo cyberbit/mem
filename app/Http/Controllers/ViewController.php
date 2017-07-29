@@ -20,13 +20,6 @@ class ViewController extends Controller
     }
     
     /**
-     * Home view
-     */
-    public function home(Request $request) {
-        return view('home');
-    }
-    
-    /**
      * Login view
      */
     public function login(Request $request) {

@@ -39,11 +39,13 @@ class UserController extends Controller
             'password' => 'required'
         ]);
         
+        // Find user by email
         $user = User::where('email', $request->input('email'))->first();
         
+        // Authenticate user via password hash
         if ($user and Hash::check($request->input('password'), $user->password)) {
+            // Generate API token and update User model
             $api_token = base64_encode(str_random(24));
-            
             User::where('email', $request->input('email'))->update(['api_token' => "$api_token"]);
             
             if ($request->has('redirect')) {

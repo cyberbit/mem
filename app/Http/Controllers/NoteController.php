@@ -109,8 +109,6 @@ class NoteController extends Controller
      * Create new note.
      */
     public function create(Request $request) {
-        //return response()->json(['auth_notes' => Auth::user()->notes]);
-        
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required'
@@ -119,11 +117,7 @@ class NoteController extends Controller
         $note = Auth::user()->notes()->create($request->all());
         
         if ($note) {
-            if ($request->has('redirect')) {
-                return redirect()->route('notes', ['api_token' => Auth::user()->api_token]);
-            } else {
-                return response()->json(['status' => 'success', 'note' => $note]);
-            }
+            return response()->json(['status' => 'success', 'note' => $note]);
         } else {
             return response()->json(['status' => 'fail']);
         }
@@ -141,11 +135,7 @@ class NoteController extends Controller
         $note = Auth::user()->notes->find($id);
         
         if ($note and $note->update($request->all())) {
-            if ($request->has('redirect')) {
-                return redirect()->route('notes', ['api_token' => Auth::user()->api_token]);
-            } else {
-                return response()->json(['status' => 'success', 'note' => $note]);
-            }
+            return response()->json(['status' => 'success', 'note' => $note]);
         } else {
             return response()->json(['status' => 'fail']);
         }
@@ -158,11 +148,7 @@ class NoteController extends Controller
         $note = Auth::user()->notes->find($id);
         
         if ($note and $note->delete()) {
-            if ($request->has('redirect')) {
-                return redirect()->route('notes', ['api_token' => Auth::user()->api_token]);
-            } else {
-                return response()->json(['status' => 'success']);
-            }
+            return response()->json(['status' => 'success']);
         } else {
             return response()->json(['status' => 'fail']);
         }

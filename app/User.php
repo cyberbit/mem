@@ -31,7 +31,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
     
     /**
-     * Get all Notes from user
+     * Get all Notes from user.
      */
     public function notes() {
         return $this->hasMany(Note::class);

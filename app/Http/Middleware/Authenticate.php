@@ -35,6 +35,7 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
+        // User is not authenticated, or API token is invalid
         if ($this->auth->guard($guard)->guest()) {
             // API request
             if ($request->is('api/*')) {

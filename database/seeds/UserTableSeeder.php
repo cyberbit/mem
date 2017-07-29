@@ -17,8 +17,6 @@ class UserTableSeeder extends Seeder
             'id'        => 1,
             'name'      => 'test',
             'email'     => 'test@test.com',
-            
-            // Using Hash::make() from Laravel would also work here
             'password'  => Hash::make('$sh4rpspr1nG$'),
             'api_token' => null
         ));

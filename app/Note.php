@@ -16,7 +16,7 @@ class Note extends Model {
     ];
     
     /**
-     * Get the user that created the note.
+     * Get the User that created the note.
      */
     public function user() {
         return $this->belongsTo(User::class);

@@ -11,7 +11,9 @@
 |
 */
 
-$app->get('', ['as' => 'home', 'uses' => 'ViewController@home']);
+$app->get('', ['as' => 'home', function() {
+    return view('home');
+}]);
 
 $app->get('api', function() {
     return response()->json(['greeting' => 'HELLO HUMAN']);

@@ -60,3 +60,22 @@ Mem can be run standalone when the host machine is properly configured, or in [L
    
     - Test email: `test@test.com`
     - Test password: `$sh4rpspr1nG$`
+
+## API Documentation
+
+Included in the repository are two files: `postman.json` and `postman.csv`, a request collection and test dataset for use with [Postman](https://www.getpostman.com/).
+
+1. Import `postman.json` into Postman as a collection. This will add a collection named "Mem", and set up over a dozen requests spanning all the features of the app (including error handling and authentication).
+2. Add an environment (Manage Environments > Add) and set the `wroot` variable to the web root of the app (`homestead.app` by default). Be sure to select the new environment after adding the variable.
+3. Send the `/api` request. If all is well, a friendly greeting should appear in the response window.
+
+### Testing
+
+The order of commands in the collection is set up for easy unit testing in Postman.
+
+1. In Postman, click Runner.
+2. Select the Mem collection and the Mem environment.
+3. For Data File, pick `postman.csv` from the repository.
+4. Click Run. Test results will appear on the right hand side of the window.
+
+The source for these tests can be found in the Tests tab of each request.
