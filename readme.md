@@ -1,4 +1,4 @@
-# Installation:
+# Installation
 
 Mem can be run standalone when the host machine is properly configured, or in [Laravel Homestead](https://laravel.com/docs/5.4/homestead), where the configuration is done automatically through a Vagrant virtual machine. The instructions below are for running using [Homestead Improved](https://www.sitepoint.com/quick-tip-get-homestead-vagrant-vm-running/), which simplifies the setup process for developing with Homestead.
 
