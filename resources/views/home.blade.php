@@ -26,8 +26,9 @@
 
 @section('content')
     <div class="home">
-        <h1 class="title display-1">Welcome to Mem.</h1>
-        <p class="lead">Mem is a bare bones note manager.</p>
+        <h1 class="title display-3">Welcome to Mem.</h1>
+        <p class="lead">Mem is a bare bones note manager for any device.</p>
+        <p class="lead">Create, edit, and delete. That's it. Really.</p>
         <p class="lead">No formatting, no nonsense.</p>
         <p class="lead">Just you and your notes.</p>
         <p class="lead"><a class="btn btn-lg btn-outline-primary" href="/login">I'm in</a></p>
