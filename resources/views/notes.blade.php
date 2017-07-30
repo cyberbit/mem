@@ -54,7 +54,7 @@
                     });
                     $note.find(".note-body").text(v.body);
                     $note.find(".note-created-by").text(v.user.name);
-                    $note.find(".note-created-at").text(v.created_at);
+                    $note.find(".note-updated-at").text(formatDate(v.updated_at));
                     $note.find(".note-btn-edit").click(function(e) {
                         e.preventDefault();
                         
@@ -90,7 +90,7 @@
                     <div class="card-block">
                         <h4 class="card-title"><span class="badge badge-primary">note.title</span></h4>
                         <p class="note-body card-text"><span class="badge badge-default">note.body</span></p>
-                        <p class="card-text"><small class="text-muted"><span class="badge badge-default">Created by <span class="note-created-by">user.name</span> on <span class="note-created-at">note.created_at</span></span></small></p>
+                        <p class="card-text"><small class="text-muted"><span class="badge badge-default">note.created_at by note.user.name</span></small></p>
                         <a href="#" class="note-btn-edit btn btn-sm btn-primary">Edit</a>
                         <a href="#" class="note-btn-delete btn btn-sm btn-outline-danger">Delete</a><br>
                     </div>

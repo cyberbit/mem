@@ -127,7 +127,7 @@
                 <div class="card-block">
                     <h4 class="card-title"><a href="#" class="note-title">note.title</a></h4>
                     <p class="note-body card-text">note.body</p>
-                    <p class="card-text"><small class="text-muted">Created by <span class="note-created-by">user.name</span> on <span class="note-created-at">note.created_at</span></small></p>
+                    <p class="card-text"><small class="text-muted"><span class="note-updated-at">note.updated_at</span> by <span class="note-created-by">user.name</span></small></p>
                     <a href="#" class="note-btn-edit btn btn-sm btn-primary">Edit</a>
                     <a href="#" class="note-btn-delete btn btn-sm btn-outline-danger">Delete</a><br>
                 </div>

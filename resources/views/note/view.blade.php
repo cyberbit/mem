@@ -20,7 +20,9 @@
 </div>
 <div class="modal-body">
     <p>{{ $note->body }}</p>
-    <small class="text-muted">Created by {{ $note->user->name }} on {{ $note->created_at }}, updated on {{ $note->updated_at }}</small>
+    <small class="text-muted">
+        <span data-date="{{ $note->updated_at }}"></span> by {{ $note->user->name }}
+    </small>
 </div>
 <div class="modal-footer">
     <button type="button" class="note-btn-edit btn btn-primary">Edit</button>
@@ -32,6 +34,11 @@
     $(function() {
         var $modal = $("#note-view-modal");
         var note = {!! json_encode($note) !!};
+        
+        // Format dates
+        $("[data-date]").each(function() {
+            $(this).text(formatDate($(this).data("date")));
+        });
         
         $modal.find(".note-btn-delete").click(function(e) {
             e.preventDefault();

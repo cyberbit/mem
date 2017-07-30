@@ -15,7 +15,7 @@ function modalFade(enableFade) {
 
 function loadModal(modal, url, showModal) {
     if (typeof showModal == "undefined") showModal = true;
-        
+    
     var $modal = $(modal);
     var $content = $modal.find(".content-loadable");
     
@@ -29,4 +29,8 @@ function loadModal(modal, url, showModal) {
     
     // Show modal
     if (showModal) $modal.modal();
+}
+
+function formatDate(date) {
+    return moment.utc(date).local().calendar();
 }
