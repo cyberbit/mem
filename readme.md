@@ -56,7 +56,7 @@ Mem can be run standalone when the host machine is properly configured, or in [L
    ```
 8. **Use the app!** Visit `homestead.app` (or whatever host you configured in step 2) in a web browser.
    
-   To login, click the link in the navigation bar.
+   To login, click the **I'm in** button on the homepage, or the **Login** link in the navigation bar.
    
     - Test email: `test@test.com`
     - Test password: `$sh4rpspr1nG$`
