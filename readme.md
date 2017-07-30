@@ -48,7 +48,7 @@ Mem can be run standalone when the host machine is properly configured, or in [L
    $ nano .env
    ```
    
-   Update `APP_KEY` to something appropriate. The **CodeIgniter Encryption Keys** section of https://randomkeygen.com works well for this purpose, as Lumen does not provide a `key:generate` utility, which is available in full Laravel distributions.
+   Update `APP_KEY` to something appropriate. The **CodeIgniter Encryption Keys** section of [https://randomkeygen.com](https://randomkeygen.com) works well for this purpose, as Lumen does not provide a `key:generate` utility, which is available in full Laravel distributions.
 7. **Configure the database and insert initial data.**
    ```bash
    $ php artisan migrate
